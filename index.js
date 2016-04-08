@@ -21,10 +21,12 @@ function update(task, props) {
     if(props.status != null) {
         task.status = props.status;
         
-        var deletePosition = _activeTaskList.indexOf(task)
-        _activeTaskList.splice(deletePosition, 1);
+        var deletePosition = _activeTaskList.indexOf(task);
         
-        _doneTaskList.push(task);     
+        if( deletePosition > -1 ) {
+            _activeTaskList.splice(deletePosition, 1);
+            _doneTaskList.push(task);     
+        }
     }
 
     // update React

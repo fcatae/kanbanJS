@@ -8,7 +8,7 @@ var TaskComponent = React.createClass({
         var task = this.props.task;
         
         return <div className="task">
-            <input type="checkbox" onChange={this.handleChange}></input>
+            <input type="checkbox" onChange={this.handleChange} checked={task.status == 1}></input>
             <input value={task.name} placeholder="Name"></input>
         </div>   
     },
@@ -32,19 +32,20 @@ var TaskListComponent = React.createClass({
 })
 
 interface ITask {
-    name : string
+    name : string,
+    status: number
 };
 
 var _activeTaskList : Array<ITask> = [ 
-    { name: 'react task 1' },
-    { name: 'react task 2' },
-    { name: 'react task 3' },
+    { name: 'react task 1', status: 0 },
+    { name: 'react task 2', status: 0 },
+    { name: 'react task 3', status: 0 },
     ];
 
 var _doneTaskList : Array<ITask> = [ 
-    { name: 'old task A' },
-    { name: 'old task B' },
-    { name: 'old task C' },
+    { name: 'old task A', status: 1 },
+    { name: 'old task B', status: 1 },
+    { name: 'old task C', status: 1 },
     ] ;
 
 function render() {
