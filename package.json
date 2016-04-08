@@ -4,11 +4,15 @@
   "description": "",
   "main": "app.js",
   "scripts": {
+    "tsx": "tsc -w components.tsx --jsx react",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "express": "^4.13.4"
+  },
+  "devDependencies": {
+    "typescript": "^1.8.9"
   }
 }
