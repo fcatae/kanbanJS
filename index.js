@@ -13,11 +13,22 @@ function create(name) {
     return task;    
 }
 
-function update(task, name, status) {
-    alert('API: update');
+function update(task, props) {
+    //alert('API: update');
     
-    (name != null) && (task.name = name);
-    (status != null) && (task.status = status); 
+    (props.name != null) && (task.name = props.name);
+    
+    if(props.status != null) {
+        task.status = props.status;
+        
+        var deletePosition = _activeTaskList.indexOf(task)
+        _activeTaskList.splice(deletePosition, 1);
+        
+        _doneTaskList.push(task);     
+    }
+
+    // update React
+    render();      
 }
 
 function tasklist() {
