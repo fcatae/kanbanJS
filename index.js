@@ -1,24 +1,27 @@
 var _tasks = [];
 
 function create(name) {    
-    alert('create');
+    // alert('API: create');
     
     var task = { name: name, status: 0 };
 
-    _tasks.push(task);
+    _activeTaskList.push(task);
 
+    // update React
+    render();
+    
     return task;    
 }
 
 function update(task, name, status) {
-    alert('update');
+    alert('API: update');
     
     (name != null) && (task.name = name);
     (status != null) && (task.status = status); 
 }
 
 function tasklist() {
-    alert('tasklist');
+    alert('API: tasklist');
     
     return _tasks;
 }

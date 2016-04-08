@@ -1,15 +1,17 @@
 var React;
 var ReactDOM;
 
+var update: Function;
+
 var TaskComponent = React.createClass({
     render: function() {
         return <div className="task">
             <input type="checkbox" onChange={this.handleChange}></input>
-            <input value={this.props.name}></input>
+            <input value={this.props.name} placeholder="Name"></input>
         </div>   
     },
     handleChange: function() {
-        alert('change');
+        update();
     }
 });
 
@@ -37,10 +39,16 @@ var _doneTaskList = [
     { name: 'old task C' },
     ];
 
-ReactDOM.render(<TaskListComponent tasks={_activeTaskList}></TaskListComponent>,
-    document.querySelector('.task-list-active')
-);
+function render() {
+    
+    ReactDOM.render(<TaskListComponent tasks={_activeTaskList}></TaskListComponent>,
+        document.querySelector('.task-list-active')
+    );
 
-ReactDOM.render(<TaskListComponent tasks={_doneTaskList}></TaskListComponent>,
-    document.querySelector('.task-list-done')
-);
+    ReactDOM.render(<TaskListComponent tasks={_doneTaskList}></TaskListComponent>,
+        document.querySelector('.task-list-done')
+    );
+
+}
+
+render();
