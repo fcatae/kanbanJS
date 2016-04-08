@@ -1,0 +1,21 @@
+{
+  "name": "protoarda",
+  "description": "",
+  "main": "app.js",
+  "authors": [
+    "Fabricio Catae <fabricio.catae@microsoft.com>"
+  ],
+  "license": "ISC",
+  "moduleType": [],
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "react": "^15.0.1"
+  }
+}
