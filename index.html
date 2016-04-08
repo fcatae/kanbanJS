@@ -5,11 +5,12 @@
     <title>A-Kanban</title>
 </head>
 <body>
-    <button>Add</button>
+    <script src="index.js"></script>
+    <button onclick="create('1')">Add</button>
     <h1>Active</h1>
     <div class="task-list">
         <div class="task">
-            <input type="checkbox">
+            <input type="checkbox" onchange="update()">
             <input value="Task 1">
         </div>        
         <div class="task">
