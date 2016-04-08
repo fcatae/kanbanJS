@@ -4,18 +4,29 @@ var ReactDOM;
 var update: Function;
 
 var TaskComponent = React.createClass({
+    getInitialState: function() {
+        return { valueName: this.props.task.name }    
+    },
     render: function() {
         var task = this.props.task;
         
         return <div className="task">
-            <input type="checkbox" onChange={this.handleChange} checked={task.status == 1}></input>
-            <input value={task.name} placeholder="Name"></input>
+            <input type="checkbox" onChange={this.handleStatusChange} checked={task.status == 1}></input>
+            <input ref="name" type="text" defaultValue={task.name} placeholder="Name2" onBlur={this.handleNameChange}></input>
         </div>   
     },
-    handleChange: function() {
+    handleStatusChange: function() {
         var task = this.props.task;
         
-        update(task, { status: 1});
+        update(task, { status: 1 } );
+    },
+    handleNameChange: function(sender) {
+        var task = this.props.task;
+        var name = this.refs.name;
+        
+        if( name.value != task.name ) {
+            update(task, { name: name.value });
+        }
     }
 });
 
