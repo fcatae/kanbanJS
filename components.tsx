@@ -12,13 +12,15 @@ var TaskComponent = React.createClass({
         
         return <div className="task">
             <input type="checkbox" onChange={this.handleStatusChange} checked={task.status == 1}></input>
-            <input ref="name" type="text" defaultValue={task.name} placeholder="Name2" onBlur={this.handleNameChange}></input>
+            <input ref="name" type="text" defaultValue={task.name} placeholder="Name" onBlur={this.handleNameChange}></input>
         </div>   
     },
     handleStatusChange: function() {
         var task = this.props.task;
         
-        update(task, { status: 1 } );
+        if( task.name ) {
+            update(task, { status: 1 } );
+        }
     },
     handleNameChange: function(sender) {
         var task = this.props.task;
@@ -35,7 +37,7 @@ var TaskListComponent = React.createClass({
         var tasks = this.props.tasks;
         
         var list = tasks.map( (t) => {
-           return <TaskComponent task={t}></TaskComponent>; 
+           return <TaskComponent key={t.id} task={t}></TaskComponent>; 
         });
         
         return <div>{list}</div>;
@@ -43,20 +45,26 @@ var TaskListComponent = React.createClass({
 })
 
 interface ITask {
+    id : number,
     name : string,
     status: number
 };
 
+var _globalTaskId = 0;
+function ID() {
+    return _globalTaskId++;
+}
+
 var _activeTaskList : Array<ITask> = [ 
-    { name: 'react task 1', status: 0 },
-    { name: 'react task 2', status: 0 },
-    { name: 'react task 3', status: 0 },
+    { id: ID(), name: 'react task 1', status: 0 },
+    { id: ID(), name: 'react task 2', status: 0 },
+    { id: ID(), name: 'react task 3', status: 0 },
     ];
 
 var _doneTaskList : Array<ITask> = [ 
-    { name: 'old task A', status: 1 },
-    { name: 'old task B', status: 1 },
-    { name: 'old task C', status: 1 },
+    { id: ID(), name: 'old task A', status: 1 },
+    { id: ID(), name: 'old task B', status: 1 },
+    { id: ID(), name: 'old task C', status: 1 },
     ] ;
 
 function render() {

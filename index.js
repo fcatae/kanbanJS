@@ -3,7 +3,7 @@ var _tasks = [];
 function create(name) {    
     // alert('API: create');
     
-    var task = { name: name, status: 0 };
+    var task = { id: ID(), name: name, status: 0 };
 
     _activeTaskList.push(task);
 
