@@ -13,8 +13,17 @@ var _tasks = [
     { id: ID(), name: 'old task C', status: 1 },    
     ];
 
+var KANBAN_ENDPOINT = 'http://localhost:8080/'; 
+
+function httpGet(cmd, data, callback) {
+    $.get(KANBAN_ENDPOINT + cmd, data, callback);
+}
+
 function create(name) {    
     // alert('API: create');
+    httpGet('create', { name: name }, function(data) {
+        alert(data);
+    });
     
     var task = { id: ID(), name: name, status: 0 };
 
@@ -28,7 +37,10 @@ function create(name) {
 
 function update(task, props) {
     //alert('API: update');
-    
+    httpGet('update', props, function(data) {
+        alert(data);
+    });
+        
     (props.name != null) && (task.name = props.name);
     
     if(props.status != null) {
@@ -47,6 +59,10 @@ function update(task, props) {
 }
 
 function tasklist() {
+    httpGet('tasklist', null, function(data) {
+        alert(data);
+    });
+        
     return _tasks;
 }
 
@@ -54,5 +70,3 @@ var tasks = tasklist();
 
 var _activeTaskList = tasks.filter ((t) => { return t.status == 0 });
 var _doneTaskList = tasks.filter ((t) => { return t.status == 1 });
-
-render();
