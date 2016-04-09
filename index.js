@@ -8,6 +8,9 @@ var _tasks = [
     { id: ID(), name: 'task 1', status: 0 },
     { id: ID(), name: 'task 2', status: 0 },
     { id: ID(), name: 'task 3', status: 0 },
+    { id: ID(), name: 'old task A', status: 1 },
+    { id: ID(), name: 'old task B', status: 1 },
+    { id: ID(), name: 'old task C', status: 1 },    
     ];
 
 function create(name) {    
@@ -47,13 +50,9 @@ function tasklist() {
     return _tasks;
 }
 
-var _activeTaskList;
- _activeTaskList = tasklist();
- 
-var _doneTaskList = [ 
-    { id: ID(), name: 'old task A', status: 1 },
-    { id: ID(), name: 'old task B', status: 1 },
-    { id: ID(), name: 'old task C', status: 1 },
-    ] ;
+var tasks = tasklist();
+
+var _activeTaskList = tasks.filter ((t) => { return t.status == 0 });
+var _doneTaskList = tasks.filter ((t) => { return t.status == 1 });
 
 render();
