@@ -1,3 +1,6 @@
+var _activeTaskList;
+var _doneTaskList;
+
 var _globalTaskId=0;
 
 function ID() {
@@ -20,19 +23,13 @@ function httpGet(cmd, data, callback) {
 }
 
 function create(name) {    
-    // alert('API: create');
     httpGet('create', { name: name }, function(data) {
-        alert(data);
-    });
-    
-    var task = { id: ID(), name: name, status: 0 };
-
-    _activeTaskList.push(task);
-
-    // update React
-    render();
-    
-    return task;    
+        var task = JSON.parse(data);        
+        
+        _activeTaskList.push(task);
+        render();
+        
+    });        
 }
 
 function update(task, props) {
@@ -78,5 +75,3 @@ tasklist( (dataReceived)=> {
     
 } );
 
-var _activeTaskList;
-var _doneTaskList;

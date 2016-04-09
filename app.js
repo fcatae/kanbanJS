@@ -31,8 +31,15 @@ app.get('/', function(req,res) {
 });
 
 // create task
-app.get('/create', function(req,res) {    
-    res.end('create');    
+app.get('/create', function(req,res) {  
+    var name = req.query.name;
+    var task;
+    
+    if(name != null) {
+        task = { id: ID(), name: name, status: 0 };        
+    }  
+    
+    res.end(JSON.stringify(task));    
 });
 
 // update task
