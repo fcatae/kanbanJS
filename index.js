@@ -34,25 +34,28 @@ function create(name) {
 
 function update(task, props) {
     //alert('API: update');
-    httpGet('update', props, function(data) {
-        alert(data);
-    });
-        
-    (props.name != null) && (task.name = props.name);
-    
-    if(props.status != null) {
-        task.status = props.status;
-        
-        var deletePosition = _activeTaskList.indexOf(task);
-        
-        if( deletePosition > -1 ) {
-            _activeTaskList.splice(deletePosition, 1);
-            _doneTaskList.push(task);     
-        }
-    }
+    props.id = task.id;
 
-    // update React
-    render();      
+    // assume the update always works
+    httpGet('update', props, function() {
+        
+        (props.name != null) && (task.name = props.name);
+        
+        if(props.status != null) {
+            task.status = props.status;
+            
+            var deletePosition = _activeTaskList.indexOf(task);
+            
+            if( deletePosition > -1 ) {
+                _activeTaskList.splice(deletePosition, 1);
+                _doneTaskList.push(task);     
+            }
+        }
+
+        // update React
+        render();               
+    });             
+   
 }
 
 function tasklist(callback) {

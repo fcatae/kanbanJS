@@ -43,8 +43,14 @@ app.get('/create', function(req,res) {
 });
 
 // update task
-app.get('/update', function(req,res) {    
-    res.end('update');    
+app.get('/update', function(req,res) {
+    var id = req.query.id;
+    var name = req.query.name;
+    var status = req.query.status;
+
+    var props = { id: id, name: name, status: status };
+        
+    res.end(JSON.stringify(props));
 });
 
 // get task list
