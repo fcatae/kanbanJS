@@ -58,15 +58,25 @@ function update(task, props) {
     render();      
 }
 
-function tasklist() {
+function tasklist(callback) {
     httpGet('tasklist', null, function(data) {
-        alert(data);
+        callback(data);
     });
         
     return _tasks;
 }
 
-var tasks = tasklist();
+var tasks;
 
-var _activeTaskList = tasks.filter ((t) => { return t.status == 0 });
-var _doneTaskList = tasks.filter ((t) => { return t.status == 1 });
+tasklist( (dataReceived)=> { 
+    tasks = JSON.parse(dataReceived);
+    
+    _activeTaskList = tasks.filter ((t) => { return t.status == 0 });
+    _doneTaskList = tasks.filter ((t) => { return t.status == 1 });
+    
+    render();
+    
+} );
+
+var _activeTaskList;
+var _doneTaskList;
