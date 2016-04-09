@@ -9,9 +9,10 @@ var TaskComponent = React.createClass({
     },
     render: function() {
         var task = this.props.task;
+        var visibility = (task.name) ? 'visible' : 'hidden';
         
         return <div className="task">
-            <input type="checkbox" onChange={this.handleStatusChange} checked={task.status == 1}></input>
+            <input type="checkbox" onChange={this.handleStatusChange} checked={task.status == 1} style={ {visibility: visibility } }></input>
             <input ref="name" type="text" defaultValue={task.name} placeholder="Name" onBlur={this.handleNameChange}></input>
         </div>   
     },
@@ -50,22 +51,8 @@ interface ITask {
     status: number
 };
 
-var _globalTaskId = 0;
-function ID() {
-    return _globalTaskId++;
-}
-
-var _activeTaskList : Array<ITask> = [ 
-    { id: ID(), name: 'react task 1', status: 0 },
-    { id: ID(), name: 'react task 2', status: 0 },
-    { id: ID(), name: 'react task 3', status: 0 },
-    ];
-
-var _doneTaskList : Array<ITask> = [ 
-    { id: ID(), name: 'old task A', status: 1 },
-    { id: ID(), name: 'old task B', status: 1 },
-    { id: ID(), name: 'old task C', status: 1 },
-    ] ;
+var _activeTaskList : Array<ITask>;
+var _doneTaskList : Array<ITask>;
 
 function render() {
     

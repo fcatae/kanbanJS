@@ -1,4 +1,14 @@
-var _tasks = [];
+var _globalTaskId=0;
+
+function ID() {
+    return _globalTaskId++;
+}
+
+var _tasks = [ 
+    { id: ID(), name: 'task 1', status: 0 },
+    { id: ID(), name: 'task 2', status: 0 },
+    { id: ID(), name: 'task 3', status: 0 },
+    ];
 
 function create(name) {    
     // alert('API: create');
@@ -34,7 +44,16 @@ function update(task, props) {
 }
 
 function tasklist() {
-    alert('API: tasklist');
-    
     return _tasks;
 }
+
+var _activeTaskList;
+ _activeTaskList = tasklist();
+ 
+var _doneTaskList = [ 
+    { id: ID(), name: 'old task A', status: 1 },
+    { id: ID(), name: 'old task B', status: 1 },
+    { id: ID(), name: 'old task C', status: 1 },
+    ] ;
+
+render();
