@@ -36,11 +36,14 @@ var TaskComponent = React.createClass({
 var TaskListComponent = React.createClass({
     render: function() {
         var tasks = this.props.tasks;
+        var list;
         
-        var list = tasks.map( (t) => {
-           return <TaskComponent key={t.id} task={t}></TaskComponent>; 
-        });
-        
+        if(tasks) { 
+            list = tasks.map( (t) => {
+                return <TaskComponent key={t.id} task={t}></TaskComponent>; 
+            });
+        }
+                
         return <div>{list}</div>;
     }
 })
@@ -65,5 +68,8 @@ function render() {
     );
 
 }
+
+// first call : tasks = null
+// second call : when the task list is loaded
 
 render();
