@@ -8,7 +8,7 @@ function ID() {
     return _globalTaskId++;
 }
 
-var _tasks = [ 
+var _initialTasks = [ 
     { id: ID(), name: 'online task 1', status: 0 },
     { id: ID(), name: 'online task 2', status: 0 },
     { id: ID(), name: 'online task 3', status: 0 },
@@ -16,6 +16,12 @@ var _tasks = [
     { id: ID(), name: 'old online task B', status: 1 },
     { id: ID(), name: 'old online task C', status: 1 },    
     ];
+
+var _tasks = {};
+
+_initialTasks.map( (t) => {
+    _tasks[t.id] = t;
+});
 
 // Express
 
@@ -39,6 +45,8 @@ app.get('/create', function(req,res) {
         task = { id: ID(), name: name, status: 0 };        
     }  
     
+    _tasks.push(task);
+    
     res.end(JSON.stringify(task));    
 });
 
@@ -50,12 +58,23 @@ app.get('/update', function(req,res) {
 
     var props = { id: id, name: name, status: status };
         
+    var task = _tasks[id];
+    (props.name != null) && (task.name = props.name); 
+    (props.status != null) && (task.status = props.status); 
+        
     res.end(JSON.stringify(props));
 });
 
 // get task list
-app.get('/tasklist', function(req,res) {    
-    res.end(JSON.stringify(_tasks));    
+app.get('/tasklist', function(req,res) {
+    
+    var tasks = [];
+    for(var k in _tasks) {
+        var t = _tasks[k];
+        tasks.push(t);
+    }   
+        
+    res.end(JSON.stringify(tasks));    
 });
 
 app.listen(8080);
