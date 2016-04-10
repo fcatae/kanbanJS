@@ -42,6 +42,7 @@ var DraggableTaskComponent = React.createClass({
    dragStart: function(ev) {
        var task = this.props.task;
        ev.dataTransfer.setData("text", task.id);
+       ev.dataTransfer.setData("task", JSON.stringify(task));
    }
 });
 

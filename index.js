@@ -44,9 +44,13 @@ function update(task, props) {
         if(props.status != null) {
             task.status = props.status;
             
-            var deletePosition = _activeTaskList.indexOf(task);
+            //var deletePosition = _activeTaskList.indexOf(task);
+            for(var deletePosition=0; deletePosition<_activeTaskList.length; deletePosition++) {
+                if(_activeTaskList[deletePosition].id == task.id)
+                    break;
+            }
             
-            if( deletePosition > -1 ) {
+            if( deletePosition < _activeTaskList.length ) {
                 _activeTaskList.splice(deletePosition, 1);
                 _doneTaskList.push(task);     
             }
