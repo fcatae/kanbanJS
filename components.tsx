@@ -33,6 +33,18 @@ var TaskComponent = React.createClass({
     }
 });
 
+//draggable="true" ondragstart="drag(event)"
+var DraggableTaskComponent = React.createClass({
+   render: function() {
+       var t = this.props.task;
+       return <div draggable="true" onDragStart={this.dragStart}><TaskComponent task={t}></TaskComponent></div>;
+   },
+   dragStart: function(ev) {
+       var task = this.props.task;
+       ev.dataTransfer.setData("text", task.id);
+   }
+});
+
 var TaskListComponent = React.createClass({
     render: function() {
         var tasks = this.props.tasks;
@@ -40,7 +52,7 @@ var TaskListComponent = React.createClass({
         
         if(tasks) { 
             list = tasks.map( (t) => {
-                return <TaskComponent key={t.id} task={t}></TaskComponent>; 
+                return <DraggableTaskComponent key={t.id} task={t}></DraggableTaskComponent>; 
             });
         }
                 
