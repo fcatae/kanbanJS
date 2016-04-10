@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>A-Kanban (v0.1)</title>
+    <link rel="stylesheet" href="kanban.css">
+    <script src="lib/jquery.min.js"></script>
+    <script src="lib/react.min.js"></script>
+    <script src="lib/react-dom.min.js"></script>
+</head>
+<body>
+    <script src="index.js"></script>
+    <button onclick="create('')">Add</button>
+
+    <h1>Active</h1>
+    <div class="task-list task-list-active"></div>
+    
+    <h1>Done</h1>
+    <div class="task-list task-list-done"></div>
+
+    <div id="container"></div>
+    <script src="components.js"></script>
+</body>
+</html>
