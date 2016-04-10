@@ -46,6 +46,7 @@ var DraggableTaskComponent = React.createClass({
    }
 });
 
+// ondrop="drop(event)" ondragover="allowDrop(event)"
 var TaskListComponent = React.createClass({
     render: function() {
         var tasks = this.props.tasks;
@@ -57,7 +58,18 @@ var TaskListComponent = React.createClass({
             });
         }
                 
-        return <div>{list}</div>;
+        return <div onDrop={this.handleDrop} onDragOver={this.handleDragOver}>{list}</div>;
+    },
+    handleDrop: function(ev) {
+        ev.preventDefault();
+        var taskId = ev.dataTransfer.getData("text");
+        var task = JSON.parse(ev.dataTransfer.getData("task"));
+        var status = (this.props.status) | 0;         
+        
+        update(task, { status: status });
+    },
+    handleDragOver: function(ev) {
+        ev.preventDefault();
     }
 })
 
@@ -72,11 +84,11 @@ var _doneTaskList : Array<ITask>;
 
 function render() {
     
-    ReactDOM.render(<TaskListComponent tasks={_activeTaskList}></TaskListComponent>,
+    ReactDOM.render(<TaskListComponent tasks={_activeTaskList} status="0"></TaskListComponent>,
         document.querySelector('.task-list-active')
     );
 
-    ReactDOM.render(<TaskListComponent tasks={_doneTaskList}></TaskListComponent>,
+    ReactDOM.render(<TaskListComponent tasks={_doneTaskList} status="1"></TaskListComponent>,
         document.querySelector('.task-list-done')
     );
 

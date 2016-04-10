@@ -16,25 +16,9 @@
     <div class="task-list task-list-active"></div>
     
     <h1>Done</h1>
-    <div class="task-list task-list-done" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+    <div class="task-list task-list-done"></div>
 
     <div id="container"></div>
     <script src="components.js"></script>
-    <script>
-
-        function allowDrop(ev) {
-            // aways dropable
-            ev.preventDefault();
-        }
-        
-        function drop(ev) {
-            ev.preventDefault();
-            var taskId = ev.dataTransfer.getData("text");
-            var task = JSON.parse(ev.dataTransfer.getData("task"));
-            
-            update(task, { status: 1 });
-        }
-        
-    </script>
 </body>
 </html>

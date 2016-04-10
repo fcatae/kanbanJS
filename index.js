@@ -42,18 +42,20 @@ function update(task, props) {
         (props.name != null) && (task.name = props.name);
         
         if(props.status != null) {
-            task.status = props.status;
+            var srcList = (task.status == 0) ? _activeTaskList : _doneTaskList;
+            var dstList = (props.status == 0) ? _activeTaskList : _doneTaskList;
             
-            //var deletePosition = _activeTaskList.indexOf(task);
-            for(var deletePosition=0; deletePosition<_activeTaskList.length; deletePosition++) {
-                if(_activeTaskList[deletePosition].id == task.id)
+            for(var deletePosition=0; deletePosition<srcList.length; deletePosition++) {
+                if(srcList[deletePosition].id == task.id)
                     break;
             }
             
-            if( deletePosition < _activeTaskList.length ) {
-                _activeTaskList.splice(deletePosition, 1);
-                _doneTaskList.push(task);     
+            if( deletePosition < srcList.length ) {
+                srcList.splice(deletePosition, 1);
+                dstList.push(task);     
             }
+
+            task.status = props.status;
         }
 
         // update React
